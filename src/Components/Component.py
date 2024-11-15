@@ -202,7 +202,6 @@ class Transform:
         self.x = value.x
         self.y = value.y
 
-
     def __init__(self, x: float = 0, y: float = 0, z: float = 0, angle: float = 0, scale: float = 1):
         self.x = x
         self.y = y
