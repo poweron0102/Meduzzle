@@ -4,6 +4,7 @@ import pygame as pg
 
 from Components.Camera import Drawable, Camera
 from Components.Component import Component, Transform
+from Geometry import Vec2
 
 
 class TileMap(Component):
@@ -36,6 +37,12 @@ class TileMapRenderer(Drawable):
 
     def get_tile(self, x: int, y: int) -> pg.Surface:
         return self.tile_set.subsurface((x * self.tile_size, y * self.tile_size, self.tile_size, self.tile_size))
+
+    def get_tile_word_position(self, x: int, y: int) -> Vec2[float]:
+        x_new = self.word_position.x + self.tile_size * (x - self.tile_map.size[0] // 2)
+        y_new = self.word_position.y + self.tile_size * (y - self.tile_map.size[1] // 2)
+
+        return Vec2(x_new, y_new)
 
     def loop(self):
         self.word_position = Transform.Global
