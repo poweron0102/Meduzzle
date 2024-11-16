@@ -59,17 +59,17 @@ def init(game: Game):
     medusa0.AddComponent(Sprite("medusa.png"))
     medusa0.AddComponent(Medusa(Vec2(3, 3), Vec2(1, 0)))
 
-    #dead = game.CreateItem()
-    dead = player.CreateChild()
-    dead.AddComponent(Button(
-        Vec2(0, -18),
-        "You died",
-        base_panel=pg.image.load("Assets/UI/Panel/panel-018.png"),
-        hover_panel=pg.image.load("Assets/UI/Border/panel-border-000.png"),
-        on_click=lambda: game.new_game(game.current_level),
-        screen_space=False
-    ))
-    dead.transform.scale = 0.2
+    # dead = game.CreateItem()
+    # #dead = player.CreateChild()
+    # dead.AddComponent(Button(
+    #     Vec2(80, 80),
+    #     "You died",
+    #     base_panel=pg.image.load("Assets/UI/Panel/panel-018.png"),
+    #     hover_panel=pg.image.load("Assets/UI/Border/panel-border-000.png"),
+    #     on_click=lambda: game.new_game(game.current_level),
+    #     screen_space=True
+    # ))
+    # dead.transform.scale = 0.2
 
 
 def loop(game: Game):

@@ -1,3 +1,5 @@
+from typing import Callable
+
 from Components.Component import Component
 from Geometry import Vec2
 from UserComponents.Map import Map
