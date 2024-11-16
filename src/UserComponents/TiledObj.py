@@ -5,8 +5,31 @@ from UserComponents.Map import Map
 
 class TiledObj(Component):
     AllObjs: dict[tuple[int, int], 'TiledObj'] = {}
+
+    _position: Vec2[int] = Vec2(0, 0)
     position: Vec2[int]
+
     is_moving: bool
+
+    transparent: bool = False
+    transparent_after_mirror: bool = False
+
+    @property
+    def position(self):
+        return self._position
+
+    @position.setter
+    def position(self, value: Vec2[int]):
+        # if self._position in self.AllPushable:
+        #    print("Error: Position already occupied")
+
+        TiledObj.AllObjs.pop(self._position.to_tuple, None)
+        self._position = value
+        TiledObj.AllObjs[value.to_tuple] = self
+
+    def on_destroy(self):
+        if self.position.to_tuple in TiledObj.AllObjs:
+            TiledObj.AllObjs.pop(self.position.to_tuple)
 
     def teleport(self, target: Vec2[int]):
         self.position = target

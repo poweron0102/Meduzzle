@@ -4,6 +4,7 @@ from Components.Component import Component
 from Components.Sprite import Sprite
 from Geometry import Vec2
 from UserComponents.Map import Map
+from UserComponents.Medusa import Medusa
 from UserComponents.Pushable import Pushable
 from UserComponents.TiledObj import TiledObj
 
@@ -17,11 +18,17 @@ class Player(TiledObj):
         self.moves = moves
         self.looking = looking
 
+        self.transparent = False
+        self.transparent_after_mirror = False
+
     def init(self):
         self.teleport(self.position)
         self.sprite = self.GetComponent(Sprite)
 
     def loop(self):
+        if pg.key.get_pressed()[pg.K_r]:
+            self.game.new_game(self.game.current_level)
+
         if not self.is_moving:
             if pg.key.get_pressed()[pg.K_a]:
                 self.move(Vec2(-1, 0))
@@ -37,16 +44,24 @@ class Player(TiledObj):
         if self.moves == 0:
             self.game.new_game(self.game.current_level)
 
+        print("Are you looking at a Medusa? ", Medusa.is_looking_to_medusa(self.position, self.looking))
+
     def move(self, direction: Vec2[int]):
         self.looking = direction
         new_pos = self.position + direction
         if Map.instance.is_solid(new_pos):
             return
 
-        if new_pos.to_tuple in Pushable.AllPushable:
-            if not Pushable.AllPushable[new_pos.to_tuple].push(direction):
+        next_obj = TiledObj.AllObjs.get(new_pos.to_tuple, None)
+        if next_obj is not None:
+            if type(next_obj) is Pushable:
+                if not next_obj.push(direction):
+                    return
+            else:
                 return
 
         self.moves -= 1
         self.is_moving = True
         self.game.scheduler.add_generator(self.slow_move(new_pos))
+
+

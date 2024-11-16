@@ -67,10 +67,10 @@ class TileMapRenderer(Drawable):
         new_size = (int(original_size[0] * position.scale), int(original_size[1] * position.scale))
         image = pg.transform.scale(image, new_size)
 
-        # Rotate image
+        # Rotate base_image
         image = pg.transform.rotate(image, -math.degrees(position.angle))
 
-        # Draw image
+        # Draw base_image
         size = image.get_size()
         self.game.screen.blit(
             image,

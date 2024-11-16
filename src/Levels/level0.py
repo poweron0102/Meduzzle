@@ -1,11 +1,13 @@
 import pygame as pg
 
+from Components.Button import Button, panel_maker
 from Components.Camera import Camera
 from Components.Sprite import Sprite
 from Components.TileMap import TileMapRenderer, TileMap
 from Geometry import Vec2
 from UserComponents.Hud import Hud
 from UserComponents.Map import Map
+from UserComponents.Medusa import Medusa
 from UserComponents.Player import Player
 from UserComponents.Pushable import Pushable
 from main import Game
@@ -40,7 +42,7 @@ def init(game: Game):
 
     player = game.CreateItem()
     player.AddComponent(Sprite("player.png"))
-    player.AddComponent(Player(Vec2(2, 0), Vec2(1, 0), 30))
+    player.AddComponent(Player(Vec2(2, 0), Vec2(1, 0), 99))
 
     obj0 = game.CreateItem()
     obj0.AddComponent(Sprite("crate.png"))
@@ -51,7 +53,23 @@ def init(game: Game):
     obj1.AddComponent(Pushable(Vec2(6, 6)))
 
     hud = game.CreateItem()
-    #hud.AddComponent(Hud("UI/Panel/panel-018.png"))
+    hud.AddComponent(Hud("UI/Panel/panel-018.png"))
+
+    medusa0 = game.CreateItem()
+    medusa0.AddComponent(Sprite("medusa.png"))
+    medusa0.AddComponent(Medusa(Vec2(3, 3), Vec2(1, 0)))
+
+    #dead = game.CreateItem()
+    dead = player.CreateChild()
+    dead.AddComponent(Button(
+        Vec2(0, -18),
+        "You died",
+        base_panel=pg.image.load("Assets/UI/Panel/panel-018.png"),
+        hover_panel=pg.image.load("Assets/UI/Border/panel-border-000.png"),
+        on_click=lambda: game.new_game(game.current_level),
+        screen_space=False
+    ))
+    dead.transform.scale = 0.2
 
 
 def loop(game: Game):

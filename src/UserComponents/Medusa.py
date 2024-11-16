@@ -4,20 +4,6 @@ from UserComponents.TiledObj import TiledObj
 
 
 class Medusa(TiledObj):
-    AllMedusa: dict[tuple[int, int], 'Medusa'] = {}
-
-    @property
-    def position(self):
-        return self._position
-
-    @position.setter
-    def position(self, value: Vec2[int]):
-        # if self._position in self.AllPushable:
-        #    print("Error: Position already occupied")
-
-        Medusa.AllMedusa.pop(self._position.to_tuple, None)
-        self._position = value
-        Medusa.AllMedusa[value.to_tuple] = self
 
     def __init__(self, start_tile: Vec2[int], looking: Vec2[int]):
         self._position: Vec2[int] = start_tile
@@ -31,12 +17,21 @@ class Medusa(TiledObj):
         pass
 
     @staticmethod
-    def is_looking_to_medusa(pos: Vec2[int], looking: Vec2[int]) -> bool:
+    def is_looking_to_medusa(pos: Vec2[int], looking: Vec2[int], mirror: bool = False) -> bool:
         new_pos = pos + looking
-        if new_pos.to_tuple in Medusa.AllMedusa:
-            return True
 
         if Map.instance.is_solid(new_pos):
             return False
+
+        next_obj = TiledObj.AllObjs.get(new_pos.to_tuple, None)
+        if next_obj is not None:
+            if type(next_obj) is Medusa:
+                return True
+            if mirror:
+                if not next_obj.transparent_after_mirror:
+                    return False
+            else:
+                if not next_obj.transparent:
+                    return False
 
         return Medusa.is_looking_to_medusa(new_pos, looking)
