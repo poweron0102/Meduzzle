@@ -40,7 +40,7 @@ def init(game: Game):
 
     player = game.CreateItem()
     player.AddComponent(Sprite("player.png"))
-    player.AddComponent(Player(Vec2(2, 0), 30))
+    player.AddComponent(Player(Vec2(2, 0), Vec2(1, 0), 30))
 
     obj0 = game.CreateItem()
     obj0.AddComponent(Sprite("crate.png"))

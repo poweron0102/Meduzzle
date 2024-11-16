@@ -11,10 +11,11 @@ from UserComponents.TiledObj import TiledObj
 class Player(TiledObj):
     sprite: Sprite
 
-    def __init__(self, start_tile: Vec2[int], moves: int):
+    def __init__(self, start_tile: Vec2[int], looking: Vec2[int], moves: int):
         self.position = start_tile
         self.is_moving = False
         self.moves = moves
+        self.looking = looking
 
     def init(self):
         self.teleport(self.position)
@@ -37,12 +38,13 @@ class Player(TiledObj):
             self.game.new_game(self.game.current_level)
 
     def move(self, direction: Vec2[int]):
+        self.looking = direction
         new_pos = self.position + direction
         if Map.instance.is_solid(new_pos):
             return
 
-        if new_pos.to_tuple in Pushable.All:
-            if not Pushable.All[new_pos.to_tuple].push(direction):
+        if new_pos.to_tuple in Pushable.AllPushable:
+            if not Pushable.AllPushable[new_pos.to_tuple].push(direction):
                 return
 
         self.moves -= 1

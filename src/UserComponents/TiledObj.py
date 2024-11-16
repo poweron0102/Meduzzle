@@ -4,6 +4,7 @@ from UserComponents.Map import Map
 
 
 class TiledObj(Component):
+    AllObjs: dict[tuple[int, int], 'TiledObj'] = {}
     position: Vec2[int]
     is_moving: bool
 
