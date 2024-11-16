@@ -1,12 +1,11 @@
 from Components.Component import Component
 from Geometry import Vec2
 from UserComponents.Map import Map
+from UserComponents.TiledObj import TiledObj
 
 
-class Pushable(Component):
+class Pushable(TiledObj):
     All: dict[tuple[int, int], 'Pushable'] = {}
-
-    _position: Vec2[int]
 
     @property
     def position(self):
@@ -20,19 +19,20 @@ class Pushable(Component):
         Pushable.All.pop(self._position.to_tuple, None)
         self._position = value
         Pushable.All[value.to_tuple] = self
-        self.game.scheduler.add_generator(self.slow_move(value))
 
     def __init__(self, position: Vec2[int]):
-        self._position = position
+        self._position: Vec2[int] = position
+        self.position: Vec2[int] = position
 
     def init(self):
-        self.teleport(self._position)
+        self.teleport(self.position)
 
     def on_destroy(self):
-        Pushable.All.pop(self._position.to_tuple)
+        if self.position.to_tuple in Pushable.All:
+            Pushable.All.pop(self.position.to_tuple)
 
     def push(self, direction: Vec2[int]) -> bool:
-        new_pos = self._position + direction
+        new_pos = self.position + direction
         if Map.instance.is_solid(new_pos):
             return False
 
@@ -41,10 +41,13 @@ class Pushable(Component):
                 return False
 
         self.position = new_pos
+
+        self.is_moving = True
+        self.game.scheduler.add_generator(self.slow_move(self.position))
         return True
 
     def can_push(self, direction: Vec2[int]) -> bool:
-        new_pos = self._position + direction
+        new_pos = self.position + direction
         if Map.instance.is_solid(new_pos):
             return False
 
@@ -52,19 +55,3 @@ class Pushable(Component):
             return Pushable.All[new_pos].can_push(direction)
 
         return True
-
-    def teleport(self, target: Vec2[int]):
-        if self._position.to_tuple in Pushable.All:
-            Pushable.All.pop(self._position.to_tuple)
-
-        Pushable.All[target.to_tuple] = self
-        self._position = target
-        self.transform.position = Map.instance.get_word_position(target)
-
-    def slow_move(self, target: Vec2[int]):
-        target_position = Map.instance.get_word_position(target)
-        while self.transform.position.distance(target_position) > 1:
-            direction = (target_position - self.transform.position).normalize()
-            self.transform.position += direction * (self.game.delta_time * 100)
-            yield
-        self.transform.position = target_position

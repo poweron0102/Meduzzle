@@ -4,6 +4,7 @@ from Components.Camera import Camera
 from Components.Sprite import Sprite
 from Components.TileMap import TileMapRenderer, TileMap
 from Geometry import Vec2
+from UserComponents.Hud import Hud
 from UserComponents.Map import Map
 from UserComponents.Player import Player
 from UserComponents.Pushable import Pushable
@@ -39,7 +40,7 @@ def init(game: Game):
 
     player = game.CreateItem()
     player.AddComponent(Sprite("player.png"))
-    player.AddComponent(Player(Vec2(2, 0)))
+    player.AddComponent(Player(Vec2(2, 0), 30))
 
     obj0 = game.CreateItem()
     obj0.AddComponent(Sprite("crate.png"))
@@ -48,6 +49,9 @@ def init(game: Game):
     obj1 = game.CreateItem()
     obj1.AddComponent(Sprite("crate.png"))
     obj1.AddComponent(Pushable(Vec2(6, 6)))
+
+    hud = game.CreateItem()
+    #hud.AddComponent(Hud("UI/Panel/panel-018.png"))
 
 
 def loop(game: Game):

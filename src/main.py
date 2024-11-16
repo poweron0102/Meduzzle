@@ -46,17 +46,20 @@ class Game:
         self.scheduler = Scheduler(self)
         self.item_list: list[Item] = []
         self.to_init: list[Callable] = []
-        self.new_game("level0", supress=True)
+        self.current_level = "level0"
+        self.new_game(self.current_level, supress=True)
         # pg.mouse.set_visible
 
     def new_game(self, level: str, supress=False):
         self.level = import_module(f".{level}", "Levels")
+        self.current_level = level
         self.run_time = 0
 
         for item in list(self.item_list):
             if item.destroy_on_load:
                 item.Destroy()
 
+        self.scheduler.clear()
         self.level.init(self)
 
         self.update()

@@ -11,10 +11,7 @@ class Map(Component):
     tile_map_texture: TileMapRenderer
 
     def __init__(self, tile_map: list[list[int]], solids: set[int]):
-        if not Map.instance:
-            Map.instance = self
-        else:
-            raise Exception("Map already exists")
+        Map.instance = self
 
         self.size = Vec2(len(tile_map[0]), len(tile_map))
         self.tile_map = tile_map
@@ -30,6 +27,3 @@ class Map(Component):
 
     def init(self):
         self.tile_map_texture = self.GetComponent(TileMapRenderer)
-
-    def update(self):
-        pass
