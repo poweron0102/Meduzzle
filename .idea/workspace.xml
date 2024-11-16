@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d673a28-b99b-4ab9-a728-a9e8e2124e40" name="Changes" comment="Working">
-      <change afterPath="$PROJECT_DIR$/src/Components/Button.py" afterDir="false" />
+    <list default="true" id="2d673a28-b99b-4ab9-a728-a9e8e2124e40" name="Changes" comment="morte">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Sprite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/TileMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/TileMap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Levels/level0.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Levels/level0.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserComponents/Hud.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/Hud.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserComponents/Medusa.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/Medusa.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserComponents/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/Player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserComponents/Pushable.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/Pushable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserComponents/TiledObj.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/TiledObj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +139,23 @@
       <option name="project" value="LOCAL" />
       <updated>1731777080261</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Button and medusa">
+      <option name="closed" value="true" />
+      <created>1731790547957</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731790547957</updated>
+    </task>
+    <task id="LOCAL-00008" summary="morte">
+      <option name="closed" value="true" />
+      <created>1731792360987</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731792360987</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,6 +176,8 @@
     <MESSAGE value="Added player e Pushable" />
     <MESSAGE value="BugFixes" />
     <MESSAGE value="Working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working" />
+    <MESSAGE value="Button and medusa" />
+    <MESSAGE value="morte" />
+    <option name="LAST_COMMIT_MESSAGE" value="morte" />
   </component>
 </project>

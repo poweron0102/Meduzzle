@@ -47,6 +47,7 @@ class Player(TiledObj):
 
     def move(self, direction: Vec2[int]):
         self.looking = direction
+        self.update_state()
         new_pos = self.position + direction
         if Map.instance.is_solid(new_pos):
             return
@@ -55,16 +56,12 @@ class Player(TiledObj):
         if next_obj is not None:
             if type(next_obj) is Pushable:
                 if not next_obj.push(direction):
-                    self.update_state()
                     return
             else:
-                self.update_state()
                 return
 
         self.moves -= 1
         self.is_moving = True
-        self.position = new_pos
-        self.update_state()
         self.game.scheduler.add_generator(self.slow_move(new_pos))
 
     def update_state(self):

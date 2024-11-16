@@ -40,11 +40,11 @@ class TiledObj(Component):
     def slow_move(self, target: Vec2[int]):
         target_position = Map.instance.get_word_position(target)
         self.game.scheduler.add_generator(self.rotate(target.x - self.position.x))
+        self.position = target
         while self.transform.position.distance(target_position) > 1:
             direction = (target_position - self.transform.position).normalize()
             self.transform.position += direction * (self.game.delta_time * 100)
             yield
-        self.position = target
         yield 0.1
         self.is_moving = False
 

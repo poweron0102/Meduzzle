@@ -79,7 +79,7 @@ class Game:
         self.delta_time = (self.time - self.last_time) / 1000.0
         self.run_time += self.delta_time
 
-        pg.display.set_caption(f'Game Name   FPS: {self.clock.get_fps():.0f}')
+        pg.display.set_caption(f'Meduzzle   FPS: {self.clock.get_fps():.0f}')
 
     def run(self):
         while True:
