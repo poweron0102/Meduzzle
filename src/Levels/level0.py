@@ -8,6 +8,7 @@ from Geometry import Vec2
 from UserComponents.Hud import Hud
 from UserComponents.Map import Map
 from UserComponents.Medusa import Medusa
+from UserComponents.Mirror import Mirror
 from UserComponents.Player import Player
 from UserComponents.Pushable import Pushable
 from main import Game
@@ -59,6 +60,24 @@ def init(game: Game):
     medusa0.AddComponent(Sprite("medusa.png"))
     medusa0.AddComponent(Medusa(Vec2(3, 3), Vec2(1, 0)))
 
+    mirror0 = game.CreateItem()
+    mirror0.AddComponent(Mirror(Vec2(7, 5), {
+        (0, 1): (1, 0),
+        (1, 0): (0, 1),
+        (0, -1): (-1, 0),
+        (-1, 0): (0, -1),
+    }))
+    mirror0.AddComponent(Sprite("mirror1.png"))
+
+    mirror1 = game.CreateItem()
+    mirror1.AddComponent(Mirror(Vec2(9, 5), {
+        (0, 1): (0, -1),
+        (1, 0): (-1, 0),
+        (0, -1): (0, 1),
+        (-1, 0): (1, 0),
+    }))
+    mirror1.AddComponent(Sprite("mirror2.png"))
+
     # dead = game.CreateItem()
     # #dead = player.CreateChild()
     # dead.AddComponent(Button(
@@ -74,9 +93,3 @@ def init(game: Game):
 
 def loop(game: Game):
     pass
-    # state = pg.mouse.get_pos()[0] / game.screen.get_width()
-    # bullet_time = pg.mouse.get_pos()[1] / game.screen.get_height()
-    # fam_component.music_instance.set_parameter_by_name("bulletTime", bullet_time)
-    # fam_component.music_instance.set_parameter_by_name("state", state)
-
-    #  player moves

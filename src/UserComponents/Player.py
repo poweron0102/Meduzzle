@@ -1,7 +1,6 @@
 import pygame as pg
 
 from Components.Button import Button
-from Components.Component import Component
 from Components.Sprite import Sprite
 from Geometry import Vec2
 from UserComponents.Map import Map
@@ -45,16 +44,17 @@ class Player(TiledObj):
             elif pg.key.get_pressed()[pg.K_s]:
                 self.move(Vec2(0, 1))
 
+        self.update_state()
+
     def move(self, direction: Vec2[int]):
         self.looking = direction
-        self.update_state()
         new_pos = self.position + direction
         if Map.instance.is_solid(new_pos):
             return
 
         next_obj = TiledObj.AllObjs.get(new_pos.to_tuple, None)
         if next_obj is not None:
-            if type(next_obj) is Pushable:
+            if isinstance(next_obj, Pushable):
                 if not next_obj.push(direction):
                     return
             else:
@@ -72,9 +72,13 @@ class Player(TiledObj):
                 Vec2(0, -18),
                 "You died",
                 base_panel=pg.image.load("Assets/UI/Panel/panel-018.png"),
-                hover_panel=pg.image.load("Assets/UI/Border/panel-border-000.png"),
+                hover_panel=pg.image.load("Assets/UI/Border/panel-border-018.png"),
                 on_click=lambda: self.game.new_game(self.game.current_level),
                 screen_space=False
             ))
             dead.transform.scale = 0.3
+
+        Medusa.update_state()
+
+
 

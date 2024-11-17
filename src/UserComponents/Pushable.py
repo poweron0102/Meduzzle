@@ -21,7 +21,7 @@ class Pushable(TiledObj):
 
         next_obj = TiledObj.AllObjs.get(new_pos.to_tuple, None)
         if next_obj is not None:
-            if not type(next_obj) is Pushable:
+            if not isinstance(next_obj, Pushable):
                 return False
             if not next_obj.push(direction):
                 return False

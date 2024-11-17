@@ -5,6 +5,7 @@ import pygame as pg
 from Components.Camera import Camera
 from Components.Camera import Drawable
 from Components.Component import Transform
+from UserComponents.Medusa import Medusa
 
 
 class Sprite(Drawable):
@@ -20,8 +21,6 @@ class Sprite(Drawable):
         self.vertical_flip = False
 
         self.word_position = Transform()
-
-        Camera.instance.to_draw.append(self)
 
     def loop(self):
         self.word_position = Transform.Global
