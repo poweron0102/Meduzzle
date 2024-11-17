@@ -4,6 +4,7 @@ from Components.Sprite import Sprite, convert_to_grayscale
 from Geometry import Vec2
 from UserComponents.Map import Map
 from UserComponents.Mirror import Mirror
+from UserComponents.Pushable import Pushable
 from UserComponents.TiledObj import TiledObj
 
 
@@ -26,11 +27,15 @@ class Medusa(TiledObj):
         super().on_destroy()
 
     def petrify(self):
+        item = self.item
+        pos: Vec2[int] = self.position
+        self.Destroy()
         sprite = self.GetComponent(Sprite)
         for i in range(10):
             sprite.image = convert_to_grayscale(sprite.image, i / 10)
             yield 0.2
-
+        yield
+        item.AddComponent(Pushable(pos))
 
     @staticmethod
     def is_looking_to_medusa(

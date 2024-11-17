@@ -37,7 +37,7 @@ class TiledObj(Component):
         self.position = target
         self.transform.position = Map.instance.get_word_position(target)
 
-    def slow_move(self, target: Vec2[int]):
+    def slow_move(self, target: Vec2[int], end_func: Callable = None):
         target_position = Map.instance.get_word_position(target)
         self.game.scheduler.add_generator(self.rotate(target.x - self.position.x))
         self.position = target
@@ -47,6 +47,8 @@ class TiledObj(Component):
             yield
         yield 0.1
         self.is_moving = False
+        if end_func:
+            end_func()
 
     def rotate(self, dir: int):
         if dir == 0:

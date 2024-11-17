@@ -44,25 +44,26 @@ class Player(TiledObj):
             elif pg.key.get_pressed()[pg.K_s]:
                 self.move(Vec2(0, 1))
 
-        self.update_state()
-
     def move(self, direction: Vec2[int]):
         self.looking = direction
         new_pos = self.position + direction
         if Map.instance.is_solid(new_pos):
+            self.update_state()
             return
 
         next_obj = TiledObj.AllObjs.get(new_pos.to_tuple, None)
         if next_obj is not None:
             if isinstance(next_obj, Pushable):
                 if not next_obj.push(direction):
+                    self.update_state()
                     return
             else:
+                self.update_state()
                 return
 
         self.moves -= 1
         self.is_moving = True
-        self.game.scheduler.add_generator(self.slow_move(new_pos))
+        self.game.scheduler.add_generator(self.slow_move(new_pos, self.update_state))
 
     def update_state(self):
         if Medusa.is_looking_to_medusa(self.position, self.looking) or self.moves <= 0:

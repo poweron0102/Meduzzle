@@ -123,6 +123,14 @@ class Component:
     def loop(self):
         pass
 
+    def Destroy(self):
+        self.on_destroy()
+        self.item.components.pop(self.__class__)
+        cls = self.__class__
+        while cls != Component:
+            cls = cls.__bases__[0]
+            self.item.components.pop(cls)
+
     # abstract method
     def on_destroy(self):
         """
