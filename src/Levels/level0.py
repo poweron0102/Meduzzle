@@ -1,7 +1,5 @@
-import pygame as pg
-
-from Components.Button import Button, panel_maker
 from Components.Camera import Camera
+from Components.FMODAudioManager import FMODAudioManager
 from Components.Sprite import Sprite
 from Components.TileMap import TileMapRenderer, TileMap
 from Geometry import Vec2
@@ -12,7 +10,6 @@ from UserComponents.Mirror import Mirror
 from UserComponents.Player import Player
 from UserComponents.Pushable import Pushable
 from main import Game
-from Components.FMODAudioManager import FMODAudioManager
 
 fam_component: FMODAudioManager
 

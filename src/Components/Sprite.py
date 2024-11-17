@@ -2,10 +2,40 @@ import math
 
 import pygame as pg
 
-from Components.Camera import Camera
 from Components.Camera import Drawable
 from Components.Component import Transform
-from UserComponents.Medusa import Medusa
+
+import pygame as pg
+
+
+def convert_to_grayscale(surface: pg.Surface, strength: float = 1) -> pg.Surface:
+    # Cria uma nova superfície com o mesmo tamanho e formato
+    grayscale_surface = pg.Surface(surface.get_size(), pg.SRCALPHA)
+
+    # Converte para um formato apropriado para píxel access
+    surface_locked = surface.copy()
+
+    # Percorre cada pixel da superfície
+    for x in range(surface.get_width()):
+        for y in range(surface.get_height()):
+            # Obtém a cor do pixel
+            r, g, b, a = surface_locked.get_at((x, y))
+
+            # Calcula a tonalidade de cinza usando a média
+            gray = int(0.299 * r + 0.587 * g + 0.114 * b)
+
+            # Define a nova cor (tons de cinza) na nova superfície
+            grayscale_surface.set_at(
+                (x, y),
+                (
+                    int(r * (1 - strength) + gray * strength),
+                    int(g * (1 - strength) + gray * strength),
+                    int(b * (1 - strength) + gray * strength),
+                    a
+                )
+            )
+
+    return grayscale_surface
 
 
 class Sprite(Drawable):

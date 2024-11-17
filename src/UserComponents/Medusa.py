@@ -1,3 +1,6 @@
+import pygame as pg
+
+from Components.Sprite import Sprite, convert_to_grayscale
 from Geometry import Vec2
 from UserComponents.Map import Map
 from UserComponents.Mirror import Mirror
@@ -22,13 +25,29 @@ class Medusa(TiledObj):
             Medusa.Medusas.remove(self)
         super().on_destroy()
 
-    def loop(self):
-        pass
+    def petrify(self):
+        sprite = self.GetComponent(Sprite)
+        for i in range(10):
+            sprite.image = convert_to_grayscale(sprite.image, i / 10)
+            yield 0.2
+
 
     @staticmethod
-    def is_looking_to_medusa(pos: Vec2[int], looking: Vec2[int], mirror: bool = False) -> bool:
+    def is_looking_to_medusa(
+            pos: Vec2[int],
+            looking: Vec2[int],
+            mirror: bool = False,
+            passed: set[tuple[tuple[int, int], tuple[int, int]]] = None
+    ):
         if looking == Vec2(0, 0):
             return False
+
+        if passed is None:
+            passed = set()
+        if (pos.to_tuple, looking.to_tuple) in passed:
+            return False
+        passed.add((pos.to_tuple, looking.to_tuple))
+
         new_pos = pos + looking
 
         if Map.instance.is_solid(new_pos):
@@ -39,12 +58,8 @@ class Medusa(TiledObj):
             next_obj_type = type(next_obj)
             if next_obj_type is Medusa:
                 return True
-            elif next_obj_type is Mirror:
-                return Medusa.is_looking_to_medusa(
-                    new_pos,
-                    Vec2(*next_obj.map_light[looking.to_tuple]),
-                    True
-                )
+            if next_obj_type is Mirror:
+                return Medusa.is_looking_to_medusa(new_pos, Vec2(*next_obj.map_light[looking.to_tuple]), True, passed)
             if mirror:
                 if not next_obj.transparent_after_mirror:
                     return False
@@ -52,11 +67,10 @@ class Medusa(TiledObj):
                 if not next_obj.transparent:
                     return False
 
-        return Medusa.is_looking_to_medusa(new_pos, looking)
+        return Medusa.is_looking_to_medusa(new_pos, looking, mirror, passed)
 
     @staticmethod
     def update_state():
         for medusa in list(Medusa.Medusas):
             if Medusa.is_looking_to_medusa(medusa.position, medusa.looking):
-                print("Destroying medusa")
-                medusa.item.Destroy()
+                medusa.game.scheduler.add_generator(medusa.petrify())

@@ -32,16 +32,3 @@ class Pushable(TiledObj):
         self.game.scheduler.add_generator(self.slow_move(new_pos))
         return True
 
-    def can_push(self, direction: Vec2[int]) -> bool:
-        new_pos = self.position + direction
-        if Map.instance.is_solid(new_pos):
-            return False
-
-        next_obj = TiledObj.AllObjs.get(new_pos.to_tuple, None)
-        if next_obj is not None:
-            if not type(next_obj) is Pushable:
-                return False
-            if not next_obj.can_push(direction):
-                return False
-
-        return True
