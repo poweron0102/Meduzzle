@@ -6,6 +6,10 @@ from UserComponents.Pushable import Pushable
 from UserComponents.TiledObj import TiledObj
 
 
+class PetrifiedMedusa(Pushable):
+    pass
+
+
 class Medusa(TiledObj):
     Medusas: set["Medusa"] = set()
 
@@ -29,7 +33,7 @@ class Medusa(TiledObj):
         pos: Vec2[int] = self.position
         self.Destroy()
         sprite = self.GetComponent(Sprite)
-        item.AddComponent(Pushable(pos))
+        item.AddComponent(PetrifiedMedusa(pos))
         for i in range(10):
             sprite.image = convert_to_grayscale(sprite.image, i / 10)
             yield 0.2

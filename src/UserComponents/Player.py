@@ -3,6 +3,7 @@ import pygame as pg
 from Components.Button import Button
 from Components.Sprite import Sprite, convert_to_grayscale
 from Geometry import Vec2
+from UserComponents.Door import Door
 from UserComponents.Map import Map
 from UserComponents.Medusa import Medusa
 from UserComponents.Pushable import Pushable
@@ -57,6 +58,11 @@ class Player(TiledObj):
                 if not next_obj.push(direction):
                     self.update_state()
                     return
+            elif isinstance(next_obj, Door):
+                if not next_obj.is_open:
+                    self.update_state()
+                    return
+                self.game.new_game(next_obj.pass_level)
             else:
                 self.update_state()
                 return

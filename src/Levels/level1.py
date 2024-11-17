@@ -7,25 +7,25 @@ from Geometry import Vec2
 from UserComponents.Door import Door
 from UserComponents.Hud import Hud
 from UserComponents.Map import Map
-from UserComponents.Medusa import Medusa, PetrifiedMedusa
+from UserComponents.Medusa import Medusa
 from UserComponents.Mirror import Mirror
 from UserComponents.Player import Player
-from UserComponents.PressurePlate import PressurePlate
 from UserComponents.Pushable import Pushable
 from main import Game
 
 fam_component: FMODAudioManager
 
 map_mat = [
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
-    [14, 14, 14, 14, 14, 14, 18, 14, 14, 14, 14, 14, 14],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
-    [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
+    [ 1,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  3],
+    [13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15],
+    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
+    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
+    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
+    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
+    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
+    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
+    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
+    [25, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 27],
 ]
 
 
@@ -39,12 +39,11 @@ def init(game: Game):
     map_comp = game.CreateItem()
     map_comp.AddComponent(TileMap(map_mat))
     map_comp.AddComponent(TileMapRenderer("tilemap.png", 16))
-    map_comp.AddComponent(Map(map_mat, {18}))
-    map_comp.transform.z = 100
+    map_comp.AddComponent(Map(map_mat, {2, 3, 26, 15, 1, 3, 25, 27, 14}))
 
     player = game.CreateItem()
     player.AddComponent(Sprite("player.png"))
-    player.AddComponent(Player(Vec2(2, 0), Vec2(1, 0), 99))
+    player.AddComponent(Player(Vec2(2, 8), Vec2(1, 0), 99))
 
     obj0 = game.CreateItem()
     obj0.AddComponent(Sprite("crate.png"))
@@ -62,7 +61,7 @@ def init(game: Game):
     medusa0.AddComponent(Medusa(Vec2(3, 3), Vec2(1, 0)))
 
     mirror0 = game.CreateItem()
-    mirror0.AddComponent(Mirror(Vec2(7, 5), {
+    mirror0.AddComponent(Mirror(Vec2(11, 5), {
         (0, 1): (1, 0),
         (1, 0): (0, 1),
         (0, -1): (-1, 0),
@@ -90,12 +89,7 @@ def init(game: Game):
         },
         "closed"
     ))
-    door_comp = door.AddComponent(Door(Vec2(12, 0), "level1"))
-
-    pressure_plate = game.CreateItem()
-    pressure_plate.AddComponent(Sprite("pressure_plate.png"))
-    pressure_plate.AddComponent(PressurePlate(Vec2(10, 6), {Player, PetrifiedMedusa}, door_comp.open, door_comp.close))
-    pressure_plate.transform.z = 5
+    door.AddComponent(Door(Vec2(10, 2), "level1"))
 
 
 def loop(game: Game):
