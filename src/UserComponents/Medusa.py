@@ -1,5 +1,3 @@
-import pygame as pg
-
 from Components.Sprite import Sprite, convert_to_grayscale
 from Geometry import Vec2
 from UserComponents.Map import Map
@@ -31,11 +29,10 @@ class Medusa(TiledObj):
         pos: Vec2[int] = self.position
         self.Destroy()
         sprite = self.GetComponent(Sprite)
+        item.AddComponent(Pushable(pos))
         for i in range(10):
             sprite.image = convert_to_grayscale(sprite.image, i / 10)
             yield 0.2
-        yield
-        item.AddComponent(Pushable(pos))
 
     @staticmethod
     def is_looking_to_medusa(
@@ -60,10 +57,9 @@ class Medusa(TiledObj):
 
         next_obj = TiledObj.AllObjs.get(new_pos.to_tuple, None)
         if next_obj is not None:
-            next_obj_type = type(next_obj)
-            if next_obj_type is Medusa:
+            if isinstance(next_obj, Medusa):
                 return True
-            if next_obj_type is Mirror:
+            if isinstance(next_obj, Mirror):
                 return Medusa.is_looking_to_medusa(new_pos, Vec2(*next_obj.map_light[looking.to_tuple]), True, passed)
             if mirror:
                 if not next_obj.transparent_after_mirror:

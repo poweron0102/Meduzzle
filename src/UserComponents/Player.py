@@ -1,7 +1,7 @@
 import pygame as pg
 
 from Components.Button import Button
-from Components.Sprite import Sprite
+from Components.Sprite import Sprite, convert_to_grayscale
 from Geometry import Vec2
 from UserComponents.Map import Map
 from UserComponents.Medusa import Medusa
@@ -63,23 +63,36 @@ class Player(TiledObj):
 
         self.moves -= 1
         self.is_moving = True
+        self.game.scheduler.add_generator(self.rotate(new_pos.x - self.position.x))
         self.game.scheduler.add_generator(self.slow_move(new_pos, self.update_state))
 
+    def petrify(self):
+        sprite = self.GetComponent(Sprite)
+        for i in range(10):
+            sprite.image = convert_to_grayscale(sprite.image, i / 10)
+            yield 0.1
+
     def update_state(self):
-        if Medusa.is_looking_to_medusa(self.position, self.looking) or self.moves <= 0:
-            self.alive = False
-            dead = self.item.CreateChild()
-            dead.AddComponent(Button(
-                Vec2(0, -18),
-                "You died",
-                base_panel=pg.image.load("Assets/UI/Panel/panel-018.png"),
-                hover_panel=pg.image.load("Assets/UI/Border/panel-border-018.png"),
-                on_click=lambda: self.game.new_game(self.game.current_level),
-                screen_space=False
-            ))
-            dead.transform.scale = 0.3
+        if Medusa.is_looking_to_medusa(self.position, self.looking):
+            self.game.scheduler.add_generator(self.petrify())
+            self.death()
+        elif self.moves <= 0:
+            self.death()
 
         Medusa.update_state()
+
+    def death(self):
+        self.alive = False
+        dead = self.item.CreateChild()
+        dead.AddComponent(Button(
+            Vec2(0, -18),
+            "You died",
+            base_panel=pg.image.load("Assets/UI/Panel/panel-018.png"),
+            hover_panel=pg.image.load("Assets/UI/Border/panel-border-018.png"),
+            on_click=lambda: self.game.new_game(self.game.current_level),
+            screen_space=False
+        ))
+        dead.transform.scale = 0.3
 
 
 

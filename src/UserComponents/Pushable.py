@@ -29,6 +29,8 @@ class Pushable(TiledObj):
         #self.position = new_pos
 
         self.is_moving = True
+        self.game.scheduler.add_generator(self.rotate(new_pos.x - self.position.x))
+        self.position = new_pos
         self.game.scheduler.add_generator(self.slow_move(new_pos))
         return True
 

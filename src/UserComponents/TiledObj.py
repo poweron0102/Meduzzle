@@ -39,7 +39,6 @@ class TiledObj(Component):
 
     def slow_move(self, target: Vec2[int], end_func: Callable = None):
         target_position = Map.instance.get_word_position(target)
-        self.game.scheduler.add_generator(self.rotate(target.x - self.position.x))
         self.position = target
         while self.transform.position.distance(target_position) > 1:
             direction = (target_position - self.transform.position).normalize()
@@ -52,7 +51,8 @@ class TiledObj(Component):
 
     def rotate(self, dir: int):
         if dir == 0:
-            return
+            #return
+            dir = 1
 
         total_time = 0.3
         start_time = self.game.run_time
