@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d673a28-b99b-4ab9-a728-a9e8e2124e40" name="Changes" comment="add mirror and medusas death">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Sprite.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Sprite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Levels/level0.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Levels/level0.py" afterDir="false" />
+    <list default="true" id="2d673a28-b99b-4ab9-a728-a9e8e2124e40" name="Changes" comment="medusa morre e vira pedra.">
+      <change beforePath="$PROJECT_DIR$/src/Components/Component.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Component.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserComponents/Medusa.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/Medusa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserComponents/Pushable.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/Pushable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserComponents/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/Player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserComponents/TiledObj.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserComponents/TiledObj.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731801965067</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="medusa morre e vira pedra.">
+      <option name="closed" value="true" />
+      <created>1731811254190</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731811254190</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,6 +203,18 @@
     <MESSAGE value="morte" />
     <MESSAGE value="Everything working" />
     <MESSAGE value="add mirror and medusas death" />
-    <option name="LAST_COMMIT_MESSAGE" value="add mirror and medusas death" />
+    <MESSAGE value="medusa morre e vira pedra." />
+    <option name="LAST_COMMIT_MESSAGE" value="medusa morre e vira pedra." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/Components/Component.py</url>
+          <line>126</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
