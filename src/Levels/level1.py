@@ -1,5 +1,6 @@
 from Components.Animator import Animator, Animation
 from Components.Camera import Camera
+from Components.Component import Item
 from Components.FMODAudioManager import FMODAudioManager
 from Components.Sprite import Sprite
 from Components.TileMap import TileMapRenderer, TileMap
@@ -16,8 +17,9 @@ from main import Game
 fam_component: FMODAudioManager
 
 map_mat = [
-    [ 1,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  3],
+    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3],
     [13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15],
+    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
     [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
     [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
     [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
@@ -28,8 +30,11 @@ map_mat = [
     [25, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 27],
 ]
 
+door: Item
+
 
 def init(game: Game):
+    global door
     # global fam_component
     # fam_component = game.CreateItem().AddComponent(
     #     FMODAudioManager(["Master.bank", "Master.strings.bank"], "music")
@@ -89,7 +94,7 @@ def init(game: Game):
         },
         "closed"
     ))
-    door.AddComponent(Door(Vec2(10, 2), "level1"))
+    door.AddComponent(Door(Vec2(10, 1), "level1"))
 
 
 def loop(game: Game):

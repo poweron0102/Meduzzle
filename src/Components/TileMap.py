@@ -42,6 +42,9 @@ class TileMapRenderer(Drawable):
         x_new = self.word_position.x + self.tile_size * (x - self.tile_map.size[0] // 2)
         y_new = self.word_position.y + self.tile_size * (y - self.tile_map.size[1] // 2)
 
+        if self.tile_map.size[0] % 2 == 0: x_new += self.tile_size // 2
+        if self.tile_map.size[1] % 2 == 0: y_new += self.tile_size // 2
+
         return Vec2(x_new, y_new)
 
     def loop(self):
