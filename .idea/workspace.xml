@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d673a28-b99b-4ab9-a728-a9e8e2124e40" name="Changes" comment="add images">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/TileMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/TileMap.py" afterDir="false" />
+    <list default="true" id="2d673a28-b99b-4ab9-a728-a9e8e2124e40" name="Changes" comment="fix bug relacionado a mapa com numero par de tiles">
       <change beforePath="$PROJECT_DIR$/src/Levels/level0.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Levels/level0.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Levels/level1.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Levels/level1.py" afterDir="false" />
     </list>
@@ -34,16 +32,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/natha/PycharmProjects/Meduzzle/src/Levels",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/natha/PycharmProjects/Meduzzle/src/Levels&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\natha\PycharmProjects\Meduzzle\src\Levels" />
@@ -229,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731889885373</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="fix bug relacionado a mapa com numero par de tiles">
+      <option name="closed" value="true" />
+      <created>1731893799545</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1731893799545</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -261,7 +267,8 @@
     <MESSAGE value="Add portas" />
     <MESSAGE value="agr s" />
     <MESSAGE value="add images" />
-    <option name="LAST_COMMIT_MESSAGE" value="add images" />
+    <MESSAGE value="fix bug relacionado a mapa com numero par de tiles" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug relacionado a mapa com numero par de tiles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

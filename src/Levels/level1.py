@@ -44,7 +44,7 @@ def init(game: Game):
     map_comp = game.CreateItem()
     map_comp.AddComponent(TileMap(map_mat))
     map_comp.AddComponent(TileMapRenderer("tilemap.png", 16))
-    map_comp.AddComponent(Map(map_mat, {2, 3, 26, 15, 1, 3, 25, 27, 14}))
+    map_comp.AddComponent(Map(map_mat, {2, 3, 26, 15, 1, 3, 25, 27, 14, 13}))
 
     player = game.CreateItem()
     player.AddComponent(Sprite("player.png"))

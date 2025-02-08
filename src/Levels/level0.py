@@ -43,8 +43,9 @@ def init(game: Game):
     map_comp.transform.z = 100
 
     player = game.CreateItem()
-    player.AddComponent(Sprite("player.png"))
+    player.AddComponent(Sprite("player_o.png"))
     player.AddComponent(Player(Vec2(2, 0), Vec2(1, 0), 99))
+    player.transform.scale = 0.125
 
     obj0 = game.CreateItem()
     obj0.AddComponent(Sprite("crate.png"))
@@ -58,8 +59,9 @@ def init(game: Game):
     hud.AddComponent(Hud("UI/Panel/panel-018.png"))
 
     medusa0 = game.CreateItem()
-    medusa0.AddComponent(Sprite("medusa.png"))
+    medusa0.AddComponent(Sprite("medusa_o.png"))
     medusa0.AddComponent(Medusa(Vec2(3, 3), Vec2(1, 0)))
+    medusa0.transform.scale = 0.125
 
     mirror0 = game.CreateItem()
     mirror0.AddComponent(Mirror(Vec2(7, 5), {
