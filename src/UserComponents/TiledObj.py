@@ -1,7 +1,8 @@
 from typing import Callable
 
-from Components.Component import Component
-from Geometry import Vec2
+from EasyCells import Vec2
+from EasyCells.Components import Component
+
 from UserComponents.Map import Map
 
 

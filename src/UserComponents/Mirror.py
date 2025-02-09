@@ -1,4 +1,5 @@
-from Geometry import Vec2
+from EasyCells import Vec2
+
 from UserComponents.Pushable import Pushable
 
 

@@ -1,5 +1,7 @@
-from Components.Sprite import Sprite, convert_to_grayscale
-from Geometry import Vec2
+from EasyCells import Vec2
+from EasyCells.Components import Sprite
+from EasyCells.Components.Sprite import convert_to_grayscale
+
 from UserComponents.Map import Map
 from UserComponents.Mirror import Mirror
 from UserComponents.Pushable import Pushable

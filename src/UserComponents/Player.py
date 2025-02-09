@@ -1,8 +1,9 @@
 import pygame as pg
+from EasyCells import Vec2
+from EasyCells.Components import Sprite
+from EasyCells.Components.Sprite import convert_to_grayscale
+from EasyCells.UiComponents import Button, UiAlignment
 
-from Components.Button import Button
-from Components.Sprite import Sprite, convert_to_grayscale
-from Geometry import Vec2
 from UserComponents.Door import Door
 from UserComponents.Map import Map
 from UserComponents.Medusa import Medusa
@@ -96,7 +97,7 @@ class Player(TiledObj):
             base_panel=pg.image.load("Assets/UI/Panel/panel-018.png"),
             hover_panel=pg.image.load("Assets/UI/Border/panel-border-018.png"),
             on_click=lambda: self.game.new_game(self.game.current_level),
-            screen_space=False
+            alignment=UiAlignment.GAME_SPACE
         ))
         dead.transform.scale = 0.3
 

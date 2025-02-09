@@ -1,8 +1,7 @@
 import pygame as pg
-
-from Components.Button import panel_maker
-from Components.Camera import Drawable
-from Geometry import Vec2
+from EasyCells import Vec2
+from EasyCells.Components.Camera import Drawable
+from EasyCells.UiComponents import panel_maker
 
 
 class Hud(Drawable):

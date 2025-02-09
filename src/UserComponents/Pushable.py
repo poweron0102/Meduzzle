@@ -1,4 +1,5 @@
-from Geometry import Vec2
+from EasyCells import Vec2
+
 from UserComponents.Map import Map
 from UserComponents.TiledObj import TiledObj
 

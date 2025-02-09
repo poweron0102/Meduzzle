@@ -1,7 +1,8 @@
 from typing import Type
 
-from Components.Component import Component
-from Geometry import Vec2
+from EasyCells import Vec2
+from EasyCells.Components import Component
+
 from UserComponents.Map import Map
 from UserComponents.TiledObj import TiledObj
 

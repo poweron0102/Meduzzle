@@ -1,10 +1,7 @@
-from Components.Animator import Animator, Animation
-from Components.Camera import Camera
-from Components.Component import Item
-from Components.FMODAudioManager import FMODAudioManager
-from Components.Sprite import Sprite
-from Components.TileMap import TileMapRenderer, TileMap
-from Geometry import Vec2
+from EasyCells import Vec2
+from EasyCells.Components import TileMap, Camera, Sprite, Animation, Animator, Item
+from EasyCells.Components.TileMap import TileMapRenderer
+
 from UserComponents.Door import Door
 from UserComponents.Hud import Hud
 from UserComponents.Map import Map
@@ -13,8 +10,6 @@ from UserComponents.Mirror import Mirror
 from UserComponents.Player import Player
 from UserComponents.Pushable import Pushable
 from main import Game
-
-fam_component: FMODAudioManager
 
 map_mat = [
     [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3],
@@ -39,7 +34,7 @@ def init(game: Game):
     # fam_component = game.CreateItem().AddComponent(
     #     FMODAudioManager(["Master.bank", "Master.strings.bank"], "music")
     # )
-    game.CreateItem().AddComponent(Camera((500, 600)))
+    game.CreateItem().AddComponent(Camera((300, 225)))
 
     map_comp = game.CreateItem()
     map_comp.AddComponent(TileMap(map_mat))

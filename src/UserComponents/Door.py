@@ -1,5 +1,6 @@
-from Components.Animator import Animator
-from Geometry import Vec2
+from EasyCells import Vec2
+from EasyCells.Components import Animator
+
 from UserComponents.TiledObj import TiledObj
 
 

@@ -1,9 +1,7 @@
-from Components.Animator import Animator, Animation
-from Components.Camera import Camera
-from Components.FMODAudioManager import FMODAudioManager
-from Components.Sprite import Sprite
-from Components.TileMap import TileMapRenderer, TileMap
-from Geometry import Vec2
+from EasyCells import Game, Vec2
+from EasyCells.Components import Camera, TileMap, Sprite, Animation, Animator
+from EasyCells.Components.TileMap import TileMapRenderer
+
 from UserComponents.Door import Door
 from UserComponents.Hud import Hud
 from UserComponents.Map import Map
@@ -12,9 +10,7 @@ from UserComponents.Mirror import Mirror
 from UserComponents.Player import Player
 from UserComponents.PressurePlate import PressurePlate
 from UserComponents.Pushable import Pushable
-from main import Game
 
-fam_component: FMODAudioManager
 
 map_mat = [
     [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14],
@@ -30,11 +26,7 @@ map_mat = [
 
 
 def init(game: Game):
-    # global fam_component
-    # fam_component = game.CreateItem().AddComponent(
-    #     FMODAudioManager(["Master.bank", "Master.strings.bank"], "music")
-    # )
-    game.CreateItem().AddComponent(Camera((500, 600)))
+    game.CreateItem().AddComponent(Camera((300, 225)))
 
     map_comp = game.CreateItem()
     map_comp.AddComponent(TileMap(map_mat))
@@ -43,9 +35,8 @@ def init(game: Game):
     map_comp.transform.z = 100
 
     player = game.CreateItem()
-    player.AddComponent(Sprite("player_o.png"))
+    player.AddComponent(Sprite("player.png"))
     player.AddComponent(Player(Vec2(2, 0), Vec2(1, 0), 99))
-    player.transform.scale = 0.125
 
     obj0 = game.CreateItem()
     obj0.AddComponent(Sprite("crate.png"))
@@ -59,9 +50,8 @@ def init(game: Game):
     hud.AddComponent(Hud("UI/Panel/panel-018.png"))
 
     medusa0 = game.CreateItem()
-    medusa0.AddComponent(Sprite("medusa_o.png"))
+    medusa0.AddComponent(Sprite("medusa.png"))
     medusa0.AddComponent(Medusa(Vec2(3, 3), Vec2(1, 0)))
-    medusa0.transform.scale = 0.125
 
     mirror0 = game.CreateItem()
     mirror0.AddComponent(Mirror(Vec2(7, 5), {

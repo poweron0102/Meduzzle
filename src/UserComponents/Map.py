@@ -1,8 +1,6 @@
-from dataclasses import dataclass
-
-from Components.Component import Component
-from Components.TileMap import TileMap, TileMapRenderer
-from Geometry import Vec2
+from EasyCells import Vec2
+from EasyCells.Components import Component
+from EasyCells.Components.TileMap import TileMapRenderer
 
 
 class Map(Component):
