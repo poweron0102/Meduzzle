@@ -1,95 +1,24 @@
-from EasyCells import Vec2
-from EasyCells.Components import TileMap, Camera, Sprite, Animation, Animator, Item
-from EasyCells.Components.TileMap import TileMapRenderer
+from EasyCells import Game
 
-from UserComponents.Door import Door
-from UserComponents.Hud import Hud
-from UserComponents.Map import Map
-from UserComponents.Medusa import Medusa
-from UserComponents.Mirror import Mirror
-from UserComponents.Player import Player
 from UserComponents.Pushable import Pushable
-from main import Game
+from Levels._shared import add_crate, add_exit, add_medusa, add_plate, room, setup
 
-map_mat = [
-    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3],
-    [13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15],
-    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
-    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
-    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
-    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
-    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
-    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
-    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
-    [13, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 15],
-    [25, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 27],
-]
 
-door: Item
+map_mat = room(
+    walls={
+        (1, 4), (2, 4), (3, 4), (4, 4),
+        (5, 4), (6, 4), (7, 4), (8, 4),
+    },
+)
 
 
 def init(game: Game):
-    global door
-    # global fam_component
-    # fam_component = game.CreateItem().AddComponent(
-    #     FMODAudioManager(["Master.bank", "Master.strings.bank"], "music")
-    # )
-    game.CreateItem().AddComponent(Camera((300, 225)))
+    setup(game, map_mat, player_at=(1, 8), moves=60)
+    add_crate(game, (3, 6))
+    add_medusa(game, (2, 2), (0, 1))
 
-    map_comp = game.CreateItem()
-    map_comp.AddComponent(TileMap(map_mat))
-    map_comp.AddComponent(TileMapRenderer("tilemap.png", 16))
-    map_comp.AddComponent(Map(map_mat, {2, 3, 26, 15, 1, 3, 25, 27, 14, 13}))
-
-    player = game.CreateItem()
-    player.AddComponent(Sprite("player.png"))
-    player.AddComponent(Player(Vec2(2, 8), Vec2(1, 0), 99))
-
-    obj0 = game.CreateItem()
-    obj0.AddComponent(Sprite("crate.png"))
-    obj0.AddComponent(Pushable(Vec2(3, 6)))
-
-    obj1 = game.CreateItem()
-    obj1.AddComponent(Sprite("crate.png"))
-    obj1.AddComponent(Pushable(Vec2(6, 6)))
-
-    hud = game.CreateItem()
-    hud.AddComponent(Hud("UI/Panel/panel-018.png"))
-
-    medusa0 = game.CreateItem()
-    medusa0.AddComponent(Sprite("medusa.png"))
-    medusa0.AddComponent(Medusa(Vec2(3, 3), Vec2(1, 0)))
-
-    mirror0 = game.CreateItem()
-    mirror0.AddComponent(Mirror(Vec2(11, 5), {
-        (0, 1): (1, 0),
-        (1, 0): (0, 1),
-        (0, -1): (-1, 0),
-        (-1, 0): (0, -1),
-    }))
-    mirror0.AddComponent(Sprite("mirror1.png"))
-
-    mirror1 = game.CreateItem()
-    mirror1.AddComponent(Mirror(Vec2(9, 5), {
-        (0, 1): (0, -1),
-        (1, 0): (-1, 0),
-        (0, -1): (0, 1),
-        (-1, 0): (1, 0),
-    }))
-    mirror1.AddComponent(Sprite("mirror2.png"))
-
-    door = game.CreateItem()
-    door.AddComponent(Sprite("door.png", (16, 16)))
-    door.AddComponent(Animator(
-        {
-            "opened": Animation(100, [3]),
-            "closed": Animation(100, [0]),
-            "open": Animation(0.2, [0, 1, 2, 3], "opened"),
-            "close": Animation(0.2, [3, 2, 1, 0], "closed"),
-        },
-        "closed"
-    ))
-    door.AddComponent(Door(Vec2(10, 1), "level1"))
+    door = add_exit(game, (11, 1), "level2")
+    add_plate(game, (9, 2), door, {Pushable})
 
 
 def loop(game: Game):
